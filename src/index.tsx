@@ -14,6 +14,8 @@ import { ConfigProvider } from 'contexts/ConfigContext';
 // style + assets
 import 'assets/scss/style.scss';
 
+import './index.css'
+
 // map
 import 'mapbox-gl/dist/mapbox-gl.css';
 

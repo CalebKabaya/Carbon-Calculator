@@ -7,6 +7,10 @@ import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
 import { loader as productsLoader, productLoader } from 'api/products';
+import React from 'react';
+import SocialProfile from 'views/application/users/social-profile';
+import ListStylePage1 from 'views/application/users/list/Style1';
+import CreateUserForm from 'CarbonCalcPages/CreateUserModal';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -177,14 +181,25 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const MainRoutes = {
     path: '/',
     element: (
-        <AuthGuard>
+        // <AuthGuard>
             <MainLayout />
-        </AuthGuard>
     ),
     children: [
         {
             path: '/widget/statistics',
             element: <WidgetStatistics />
+        },
+        {
+            path: '/user-profile',
+            element: <SocialProfile />
+        },
+        {
+            path: '/users-list',
+            element: <ListStylePage1 />
+        },
+        {
+            path: '/create-user',
+            element: <CreateUserForm />
         },
         {
             path: '/widget/data',

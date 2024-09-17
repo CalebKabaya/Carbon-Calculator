@@ -3,6 +3,8 @@ import { lazy } from 'react';
 // project imports
 import Loadable from 'ui-component/Loadable';
 import MinimalLayout from 'layout/MinimalLayout';
+import React from 'react';
+import SocialProfile from 'views/application/users/social-profile';
 
 // login option 1 routing
 const AuthLogin1 = Loadable(lazy(() => import('views/pages/authentication/authentication1/Login1')));
@@ -73,7 +75,7 @@ const AuthenticationRoutes = {
         },
 
         {
-            path: '/pages/login/login2',
+            path: '/carbon-login',
             element: <AuthLogin2 />
         },
         {

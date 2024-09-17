@@ -50,10 +50,16 @@ const JWTLogin = ({ loginProp, ...others }) => {
     };
 
     return (
+        <Box>
+            <img src="../../assets/Carbon Calculator Logo.png" 
+            alt="Carbon Calculator Logo"
+            width={100}
+            height={100}
+            />
         <Formik
             initialValues={{
-                email: 'info@codedthemes.com',
-                password: '123456',
+                email: '',
+                password: '',
                 submit: null
             }}
             validationSchema={Yup.object().shape({
@@ -176,6 +182,7 @@ const JWTLogin = ({ loginProp, ...others }) => {
                 </form>
             )}
         </Formik>
+        </Box>
     );
 };
 

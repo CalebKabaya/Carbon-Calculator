@@ -19,6 +19,7 @@ import AuthSlider from 'ui-component/cards/AuthSlider';
 
 // assets
 import imgMain from 'assets/images/auth/img-a2-login.svg';
+import React from 'react';
 
 // carousel items
 const items = [
@@ -109,31 +110,39 @@ const Login = () => {
                     </Grid>
                 </Grid>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
-                    <BackgroundPattern2>
-                        <Grid item container justifyContent="center">
-                            <Grid item xs={12}>
-                                <Grid item container justifyContent="center" sx={{ pb: 8 }}>
-                                    <Grid item xs={10} lg={8} sx={{ '& .slick-list': { pb: 2 } }}>
-                                        <AuthSlider items={items} />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={12} sx={{ position: 'relative' }}>
-                                <img
-                                    alt="Auth method"
-                                    src={imgMain}
-                                    style={{
-                                        maxWidth: '100%',
-                                        margin: '0 auto',
-                                        display: 'block',
-                                        width: 300,
-                                        position: 'relative',
-                                        zIndex: 5
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </BackgroundPattern2>
+                <Box
+  className="relative rounded-lg"
+  style={{
+    backgroundImage: 'url(https://images.unsplash.com/photo-1528122819723-9dca3a31295d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHN1c3RhaW5hYmlsaXR5fGVufDB8fDB8fHww)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100%'
+  }}
+>
+  <div
+  className="rounded-b-lg"
+    style={{
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      height: '25%',
+      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4))',
+      backdropFilter: 'blur(6px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+      fontSize: '1.5rem',
+      fontWeight: 'bold'
+    }}
+  >
+    <Typography>“Excite! has saved us thousands of hours of work. We are able to spin up projects  faster and take on more clients.”</Typography>
+    <Typography>Lula Meyers</Typography>
+    <Typography>Product Manager, Hourglass</Typography>
+    <Typography>Web Design Agency</Typography>
+  </div>
+</Box>
+
                 </Grid>
             </Grid>
         </AuthWrapper2>
