@@ -18,9 +18,10 @@ import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowth
 import MainCard from 'ui-component/cards/MainCard';
 import { ThemeMode } from 'config';
 import { gridSpacing } from 'store/constant';
+import monthlyData from '../chart-data/MontlyData';
+import OffsetData from './OffestData';
 
 // chart data
-import chartData from './chart-data/total-growth-bar-chart';
 
 const status = [
     {
@@ -39,7 +40,7 @@ const status = [
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const TotalGrowthBarChart = ({ isLoading }) => {
+const OffsetMonthlyAnalysis = ({ isLoading }) => {
     const [value, setValue] = React.useState('today');
     const theme = useTheme();
     const { mode } = useConfig();
@@ -56,7 +57,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
 
     React.useEffect(() => {
         const newChartData = {
-            ...chartData.options,
+            ...OffsetData.options,
             colors: [primary200, primaryDark, secondaryMain, secondaryLight],
             xaxis: {
                 labels: {
@@ -95,10 +96,10 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle1">Emission By Scope</Typography>
+                                            <Typography variant="subtitle1">Carbon Offset Monthly Analysis</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Track and filter Emission By Scope </Typography>
+                                            <Typography variant="subtitle2">Solar Power Project </Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -127,7 +128,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                 }
                             }}
                         >
-                            <Chart {...chartData} />
+                            <Chart {...OffsetData} />
                         </Grid>
                     </Grid>
                 </MainCard>
@@ -136,8 +137,8 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     );
 };
 
-TotalGrowthBarChart.propTypes = {
+OffsetMonthlyAnalysis.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default TotalGrowthBarChart;
+export default OffsetMonthlyAnalysis;

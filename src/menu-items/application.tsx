@@ -13,6 +13,7 @@ import {
     IconCalendar,
     IconNfc
 } from '@tabler/icons-react';
+import React from 'react';
 
 // constant
 const icons = {

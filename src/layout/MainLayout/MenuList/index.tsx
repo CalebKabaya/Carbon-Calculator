@@ -13,9 +13,8 @@ import NavGroup from './NavGroup';
 import menuItem from 'menu-items';
 import useConfig from 'hooks/useConfig';
 
-import { MenuOrientation } from 'config';
-import { Menu } from 'menu-items/widget';
-import { HORIZONTAL_MAX_ITEM } from 'config';
+import  MenuOrientation  from 'config';
+import HORIZONTAL_MAX_ITEM  from 'config';
 import { useGetMenu, useGetMenuMaster } from 'api/menu';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
@@ -32,8 +31,6 @@ const MenuList = () => {
     const [selectedID, setSelectedID] = useState('');
     const [menuItems, setMenuItems] = useState({ items: [] });
 
-    let widgetMenu = Menu();
-
     useLayoutEffect(() => {
         const isFound = menuItem.items.some((element) => {
             if (element.id === 'group-widget') {
@@ -41,11 +38,12 @@ const MenuList = () => {
             }
             return false;
         });
+
         if (menuLoading) {
-            menuItem.items.splice(1, 0, widgetMenu);
+            // You might want to handle what happens during loading here
             setMenuItems({ items: [...menuItem.items] });
-        } else if (!menuLoading && widgetMenu?.id !== undefined && !isFound) {
-            menuItem.items.splice(1, 1, widgetMenu);
+        } else if (!menuLoading && !isFound) {
+            // Remove widgetMenu handling
             setMenuItems({ items: [...menuItem.items] });
         } else {
             setMenuItems({ items: [...menuItem.items] });

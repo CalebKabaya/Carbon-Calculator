@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
 import { ThemeMode } from 'config';
+import React from 'react';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -75,7 +76,7 @@ const TotalIncomeLightCard = ({ isLoading, total, icon, label }) => {
                                 </ListItemAvatar>
                                 <ListItemText
                                     sx={{ py: 0, mt: 0.45, mb: 0.45 }}
-                                    primary={<Typography variant="h4">${total}k</Typography>}
+                                    primary={<Typography variant="h4">{total}</Typography>}
                                     secondary={
                                         <Typography variant="subtitle2" sx={{ color: 'grey.500', mt: 0.5 }}>
                                             {label}

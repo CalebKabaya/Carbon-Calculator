@@ -18,9 +18,9 @@ import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowth
 import MainCard from 'ui-component/cards/MainCard';
 import { ThemeMode } from 'config';
 import { gridSpacing } from 'store/constant';
+import monthlyData from '../chart-data/MontlyData';
 
 // chart data
-import chartData from './chart-data/total-growth-bar-chart';
 
 const status = [
     {
@@ -39,7 +39,7 @@ const status = [
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const TotalGrowthBarChart = ({ isLoading }) => {
+const EmissionMonthlyAnalysis = ({ isLoading }) => {
     const [value, setValue] = React.useState('today');
     const theme = useTheme();
     const { mode } = useConfig();
@@ -56,7 +56,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
 
     React.useEffect(() => {
         const newChartData = {
-            ...chartData.options,
+            ...monthlyData.options,
             colors: [primary200, primaryDark, secondaryMain, secondaryLight],
             xaxis: {
                 labels: {
@@ -127,7 +127,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                 }
                             }}
                         >
-                            <Chart {...chartData} />
+                            <Chart {...monthlyData} />
                         </Grid>
                     </Grid>
                 </MainCard>
@@ -136,8 +136,8 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     );
 };
 
-TotalGrowthBarChart.propTypes = {
+EmissionMonthlyAnalysis.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default TotalGrowthBarChart;
+export default EmissionMonthlyAnalysis;

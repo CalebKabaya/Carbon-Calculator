@@ -38,6 +38,7 @@ import { ThemeMode } from 'config';
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-react';
 import useConfig from 'hooks/useConfig';
+import React from 'react';
 
 // ==============================|| PROFILE MENU ||============================== //
 

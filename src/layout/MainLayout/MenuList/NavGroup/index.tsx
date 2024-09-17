@@ -30,6 +30,7 @@ import { MenuOrientation } from 'config';
 
 // assets
 import { IconChevronDown, IconChevronRight, IconMinusVertical } from '@tabler/icons-react';
+import React from 'react';
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 

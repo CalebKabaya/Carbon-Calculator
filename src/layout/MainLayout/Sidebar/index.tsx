@@ -21,6 +21,7 @@ import { MenuOrientation } from 'config';
 import { drawerWidth } from 'store/constant';
 
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
+import React from 'react';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 

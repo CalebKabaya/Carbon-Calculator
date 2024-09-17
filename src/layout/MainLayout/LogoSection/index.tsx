@@ -6,6 +6,7 @@ import Link from '@mui/material/Link';
 // project imports
 import { DASHBOARD_PATH } from 'config';
 import Logo from 'ui-component/Logo';
+import React from 'react';
 
 // ==============================|| MAIN LOGO ||============================== //
 

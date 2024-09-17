@@ -18,9 +18,10 @@ import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowth
 import MainCard from 'ui-component/cards/MainCard';
 import { ThemeMode } from 'config';
 import { gridSpacing } from 'store/constant';
+import monthlyData from '../chart-data/MontlyData';
+import countryData from '../chart-data/CountryData';
 
 // chart data
-import chartData from './chart-data/total-growth-bar-chart';
 
 const status = [
     {
@@ -39,7 +40,7 @@ const status = [
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const TotalGrowthBarChart = ({ isLoading }) => {
+const EmissionByCountryAnalysis = ({ isLoading }) => {
     const [value, setValue] = React.useState('today');
     const theme = useTheme();
     const { mode } = useConfig();
@@ -56,7 +57,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
 
     React.useEffect(() => {
         const newChartData = {
-            ...chartData.options,
+            ...countryData.options,
             colors: [primary200, primaryDark, secondaryMain, secondaryLight],
             xaxis: {
                 labels: {
@@ -95,27 +96,14 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle1">Emission By Scope</Typography>
+                                            <Typography variant="subtitle1">Emission By Country</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Track and filter Emission By Scope </Typography>
+                                            <Typography variant="subtitle2">Track and filter Emission By Country </Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <TextField
-                                        id="standard-select-currency"
-                                        select
-                                        value={value}
-                                        onChange={(e) => setValue(e.target.value)}
-                                    >
-                                        {status.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </Grid>
+                            
                             </Grid>
                         </Grid>
                         <Grid
@@ -127,7 +115,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                 }
                             }}
                         >
-                            <Chart {...chartData} />
+                            <Chart {...countryData} />
                         </Grid>
                     </Grid>
                 </MainCard>
@@ -136,8 +124,8 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     );
 };
 
-TotalGrowthBarChart.propTypes = {
+EmissionByCountryAnalysis.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default TotalGrowthBarChart;
+export default EmissionByCountryAnalysis;

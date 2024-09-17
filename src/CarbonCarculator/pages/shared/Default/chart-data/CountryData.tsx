@@ -1,5 +1,7 @@
-const chartData = {
-    height: 240,
+// ==============================|| DASHBOARD - TOTAL GROWTH BAR CHART ||============================== //
+
+const countryData = {
+    height: 350,
     type: 'bar',
     options: {
         chart: {
@@ -12,6 +14,18 @@ const chartData = {
                 enabled: true
             }
         },
+        responsive: [
+            {
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        offsetX: -10,
+                        offsetY: 0
+                    }
+                }
+            }
+        ],
         plotOptions: {
             bar: {
                 horizontal: false,
@@ -20,7 +34,7 @@ const chartData = {
         },
         xaxis: {
             type: 'category',
-            categories: ['Generator Fuels'] // Single category
+            categories: ['Kenya', 'Uganda', 'Tanzania', 'Rwanda', 'Malawi', 'South Sudan', 'Mozambique', 'DRC']
         },
         legend: {
             show: true,
@@ -52,9 +66,18 @@ const chartData = {
     },
     series: [
         {
-            name: 'Generator Fuels',
-            data: [100] // Single data point for the "Generator Fuels" category
-        }
+            name: 'Scope 1',
+            data: [35, 125, 35, 35, 35, 80, 35, 20]
+        },
+        {
+            name: 'Scope 2',
+            data: [35, 15, 15, 35, 65, 40, 80, 25]
+        },
+        {
+            name: 'Scope 3',
+            data: [35, 145, 35, 35, 20, 105, 100, 10]
+        },
+       
     ]
 };
-export default chartData;
+export default countryData;
