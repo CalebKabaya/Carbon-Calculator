@@ -9,7 +9,7 @@ const SignupSchema = Yup.object().shape({
   role: Yup.string().oneOf(['Administrator', 'User'], 'Invalid role').required('Required'),
 });
 
-const CreateUserForm = () => {
+const CreateUserModal = () => {
   return (
     <Box className="flex flex-col items-center p-8 bg-white rounded-lg shadow-lg w-full max-w-md mx-auto">
       <Typography variant="h5" className="mb-4">Add User Modal</Typography>
@@ -21,28 +21,56 @@ const CreateUserForm = () => {
           console.log(values);
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, handleChange, handleBlur, values }) => (
           <Form className="w-full">
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-              <Field name="name" placeholder="Enter name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-              <ErrorMessage name="name" component="div" className="text-red-600 text-sm mt-1" />
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Name"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
+                className="mt-1"
+              />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <Field name="email" type="email" placeholder="Enter email" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-              <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Email"
+                name="email"
+                type="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+                className="mt-1"
+              />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">User Role</label>
-              <Field as="select" name="role" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="" label="Select role" />
-                <option value="Administrator" label="Administrator" />
-                <option value="User" label="User" />
-              </Field>
-              <ErrorMessage name="role" component="div" className="text-red-600 text-sm mt-1" />
+              <TextField
+                fullWidth
+                select
+                variant="outlined"
+                label="User Role"
+                name="role"
+                value={values.role}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.role && Boolean(errors.role)}
+                helperText={touched.role && errors.role}
+                className="mt-1"
+              >
+                <MenuItem value="Administrator">Administrator</MenuItem>
+                <MenuItem value="User">User</MenuItem>
+              </TextField>
             </div>
 
             <div className="flex justify-between">
@@ -56,4 +84,4 @@ const CreateUserForm = () => {
   );
 };
 
-export default CreateUserForm;
+export default CreateUserModal;
