@@ -53,7 +53,7 @@ const chartData = {
     series: [
         {
             name: 'Generator Fuels',
-            data: [100] // Single data point for the "Generator Fuels" category
+            data: [10] // Single data point for the "Generator Fuels" category
         }
     ]
 };

@@ -37,6 +37,7 @@ import useConfig from 'hooks/useConfig';
 // assets
 import { IconSettings, IconPlus, IconTextSize, IconColorSwatch } from '@tabler/icons-react';
 import { ThemeMode } from 'config';
+import React from 'react';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -150,7 +151,7 @@ const Customization = () => {
                                 <Grid container spacing={2.5}>
                                     <Grid item xs={12}>
                                         {/* layout type */}
-                                        <ThemeModeLayout />
+                                        {/* <ThemeModeLayout /> */}
                                         <Divider />
                                     </Grid>
                                     <Grid item xs={12}>

@@ -17,12 +17,13 @@ import chartData from './Emissions/chart-data';
 // assets
 import MainCard from 'ui-component/cards/MainCard';
 import { Grid } from '@mui/material';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
+import TotalGrowthBarChart from './ScopeEmissions';
 import EmissionsChartCard from './Emissions/totalEmissions';
 import useConfig from 'hooks/useConfig';
 import EmissionMonthlyAnalysis from './Emissions/monthlyAnalysis';
 import EmissionByCountryAnalysis from './Emissions/countryAnalysis';
 import OffsetMonthlyAnalysis from './Offsets/monthlyOffsets';
+import EmissionByScopeAnalysis from './Emissions/EmissionByScope';
 
 // tab content customize
 function TabPanel({ children, value, index, ...other }) {
@@ -118,7 +119,7 @@ export default function OptionsTabs() {
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            borderRadius: 1
+                            borderRadius: 1,
                         },
                         '& a.Mui-selected': {
                             backgroundColor: 'secondary.main',
@@ -139,7 +140,7 @@ export default function OptionsTabs() {
                 value={value}
                 index={0}
                 sx={{
-                    p: 0
+                    p: 0,
                 }}
             >
                 <Box
@@ -148,28 +149,29 @@ export default function OptionsTabs() {
                         gap: 2, // Add gap between the components (adjust as needed)
                         alignItems: 'flex-start', // Align components to the top
                         justifyContent: 'space-between', // Space between the components
-                        width: '100%' // Ensure full width
+                        width: '100%', // Ensure full width
+                        margin:0,
+                        padding:0
                     }}
                 >
                     <Grid item xs={12} md={4} sx={{ p: 0, m: 0 }}>
                         <EmissionsChartCard chartData={chartData.RevenueChartCardData} />
                     </Grid>
-                    <Grid item xs={12} md={8} sx={{ p: 0, m: 0 }}>
-                        <TotalGrowthBarChart isLoading={isLoading} />
+                    <Grid item xs={12} md={8} sx={{ p: 0, m: 0,  }}>
+                        <EmissionByScopeAnalysis isLoading={isLoading} />
                     </Grid>
                 </Box>
                 <Grid item xs={12} md={12} sx={{ p: 0, mt: 3 }}>
-                        <EmissionMonthlyAnalysis isLoading={isLoading} />
-                    </Grid>
+                    <EmissionMonthlyAnalysis isLoading={isLoading} />
+                </Grid>
 
-                    <Grid item xs={12} md={12} sx={{ p: 0, mt: 3 }}>
-                        <EmissionByCountryAnalysis isLoading={isLoading} />
-                    </Grid>
+                <Grid item xs={12} md={12} sx={{ p: 0, mt: 3 }}>
+                    <EmissionByCountryAnalysis isLoading={isLoading} />
+                </Grid>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            <OffsetMonthlyAnalysis isLoading={isLoading} />
-
+                <OffsetMonthlyAnalysis isLoading={isLoading} />
             </TabPanel>
         </>
     );

@@ -34,7 +34,7 @@ const dashboard = {
         },
         {
             id: 'reporting',
-            title: <FormattedMessage id="reporting" />,
+            title: <FormattedMessage id="Reporting" />,
             type: 'item',
             url: '/sample-page',
             icon: icons.IconReport,
@@ -52,7 +52,7 @@ const dashboard = {
             id: 'users',
             title: <FormattedMessage id="Users" />,
             type: 'item',
-            url: '/sample-page',
+            url: '/users',
             icon: icons.IconUserCheck,
             breadcrumbs: false
         },
@@ -60,10 +60,11 @@ const dashboard = {
             id: 'profile',
             title: <FormattedMessage id="Profile" />,
             type: 'item',
-            url: '/sample-page',
+            url: '/dashboard/profile',
             icon: icons.IconUserCircle,
             breadcrumbs: false
         },
+    
     ]
 };
 

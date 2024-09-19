@@ -11,11 +11,53 @@ import Chart from 'react-apexcharts';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useStatisticsStore } from 'CarbonCarculator/store';
 
 // ===========================|| REVENUE CHART CARD ||=========================== //
 
-const EmissionsChartCard = ({ chartData }) => {
+const EmissionsChartCard = () => {
+    const { isLoading, isError, error, statisticData, getStatistic } = useStatisticsStore();
+
+    useEffect(() => {
+        getStatistic();
+    }, [getStatistic]);
+
+    // Define chartData dynamically based on statisticData
+    const chartData = {
+        height: 228,
+        type: 'donut',
+        options: {
+            chart: {
+                id: 'revenue-chart'
+            },
+            dataLabels: {
+                enabled: false
+            },
+            labels: ['Scope 1', 'Scope 2', 'Scope 3'],
+            legend: {
+                show: true,
+                position: 'bottom',
+                fontFamily: 'inherit',
+                labels: {
+                    colors: 'inherit'
+                },
+                itemMargin: {
+                    horizontal: 10,
+                    vertical: 10
+                }
+            }
+        },
+        series: [
+            statisticData?.scope1Total || 0,
+            statisticData?.scope2Total || 0,
+            statisticData?.scope3Total || 0
+        ]
+    };
+
+
+    if (isError) return <div>Error: {error}</div>;
+
     return (
         <MainCard title="Total Emissions">
             <Grid container spacing={2} direction={{ xs: 'column', sm: 'row', md: 'column' }}>
@@ -32,7 +74,7 @@ const EmissionsChartCard = ({ chartData }) => {
                         <Grid container direction="column">
                             <Typography variant="h6">Scope 1</Typography>
                             <Typography variant="subtitle1" sx={{ color: 'error.main' }}>
-                                + 16.85%
+                                 {statisticData?.scope1Total || '0%'}
                             </Typography>
                         </Grid>
                     </Grid>
@@ -41,7 +83,7 @@ const EmissionsChartCard = ({ chartData }) => {
                             <Typography variant="h6">Scope 2</Typography>
                             <Box sx={{ color: 'primary.main' }}>
                                 <Typography variant="subtitle1" color="inherit">
-                                    + 45.36%
+                                     {statisticData?.scope2Total || '0%'}
                                 </Typography>
                             </Box>
                         </Grid>
@@ -50,7 +92,7 @@ const EmissionsChartCard = ({ chartData }) => {
                         <Grid container direction="column">
                             <Typography variant="h6">Scope 3</Typography>
                             <Typography variant="subtitle1" sx={{ color: 'secondary.main' }}>
-                                - 50.69%
+                                 {statisticData?.scope3Total || '0%'}
                             </Typography>
                         </Grid>
                     </Grid>

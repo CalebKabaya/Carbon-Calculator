@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -18,27 +18,17 @@ import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowth
 import MainCard from 'ui-component/cards/MainCard';
 import { ThemeMode } from 'config';
 import { gridSpacing } from 'store/constant';
-import monthlyData from '../chart-data/MontlyData';
 import OffsetData from './OffestData';
 
-// chart data
+// Zustand Store
+import { useOffsetStore } from 'CarbonCarculator/store';
 
+// chart data options
 const status = [
-    {
-        value: 'today',
-        label: 'Scope  3'
-    },
-    {
-        value: 'month',
-        label: 'Scope 2'
-    },
-    {
-        value: 'year',
-        label: 'Scope 1'
-    }
+    { value: 'today', label: 'Scope 3' },
+    { value: 'month', label: 'Scope 2' },
+    { value: 'year', label: 'Scope 1' }
 ];
-
-// ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
 const OffsetMonthlyAnalysis = ({ isLoading }) => {
     const [value, setValue] = React.useState('today');
@@ -55,38 +45,62 @@ const OffsetMonthlyAnalysis = ({ isLoading }) => {
     const secondaryMain = theme.palette.secondary.main;
     const secondaryLight = theme.palette.secondary.light;
 
-    React.useEffect(() => {
-        const newChartData = {
-            ...OffsetData.options,
-            colors: [primary200, primaryDark, secondaryMain, secondaryLight],
-            xaxis: {
-                labels: {
-                    style: {
-                        colors: [primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary]
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: [primary]
-                    }
-                }
-            },
-            grid: { borderColor: divider },
-            tooltip: { theme: mode },
-            legend: { labels: { colors: grey500 } }
-        };
+    // Zustand Store
+    const { isLoading: storeLoading, offsetData, getOffset } = useOffsetStore();
 
-        // do not load chart when loading
-        if (!isLoading) {
-            ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
+    useEffect(() => {
+        getOffset(); // Fetch offset data when the component mounts
+    }, [getOffset]);
+
+    console.log(offsetData, 'offsetData')
+
+    useEffect(() => {
+        if (!storeLoading && offsetData) {
+            // Extract months and offsets from offsetData
+            const months = offsetData.map((item) => item.month); // x-axis labels (months)
+            const offsets = offsetData.map((item) => item.offset); // y-axis data (offsets)
+    
+            const newChartData = {
+                ...OffsetData.options,
+                colors: [primary200, primaryDark, secondaryMain, secondaryLight],
+                xaxis: {
+                    ...OffsetData.options.xaxis,
+                    categories: months, // Use months for x-axis labels
+                    labels: {
+                        style: {
+                            colors: new Array(months.length).fill(primary)
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: [primary]
+                        }
+                    }
+                },
+                grid: { borderColor: divider },
+                tooltip: { theme: mode },
+                legend: { labels: { colors: grey500 } }
+            };
+    
+            // Update series data with the fetched offsets
+            newChartData.series = [
+                {
+                    name: 'Offset',
+                    data: offsets // Use the offset values for the data series
+                }
+            ];
+    
+            // Update the chart
+            ApexCharts.exec('line-chart', 'updateOptions', newChartData);
         }
-    }, [mode, primary200, primaryDark, secondaryMain, secondaryLight, primary, darkLight, divider, isLoading, grey500]);
+    }, [storeLoading, offsetData, mode, primary200, primaryDark, secondaryMain, secondaryLight, primary, divider, grey500]);
+    
 
     return (
         <>
-            {isLoading ? (
+            {isLoading || storeLoading ? (
                 <SkeletonTotalGrowthBarChart />
             ) : (
                 <MainCard>
@@ -99,24 +113,11 @@ const OffsetMonthlyAnalysis = ({ isLoading }) => {
                                             <Typography variant="subtitle1">Carbon Offset Monthly Analysis</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Solar Power Project </Typography>
+                                            <Typography variant="subtitle2">Solar Power Project</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <TextField
-                                        id="standard-select-currency"
-                                        select
-                                        value={value}
-                                        onChange={(e) => setValue(e.target.value)}
-                                    >
-                                        {status.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </Grid>
+                               
                             </Grid>
                         </Grid>
                         <Grid

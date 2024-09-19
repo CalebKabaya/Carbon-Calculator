@@ -12,13 +12,16 @@ import React from 'react';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('CarbonCarculator/pages/shared/Default/index')));
 const DashboardAnalytics = Loadable(lazy(() => import('views/dashboard/Analytics')));
+const SocialProfile =Loadable(lazy(() => import('CarbonCarculator/pages/shared/Profile/index')));
+const Users =Loadable(lazy(() => import('CarbonCarculator/pages/shared/Users/index')));
+const Calculator =Loadable(lazy(() => import('CarbonCarculator/pages/shared/Externalcalaulator/index')));
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
-const MainRoutes = {
+const AdminRoutes = {
     path: '/',
     element: (
         <AuthGuard>
@@ -35,10 +38,23 @@ const MainRoutes = {
             element: <DashboardDefault />
         },
         {
+            path: '/dashboard/profile',
+            element: <SocialProfile />
+        },
+        {
             path: '/dashboard/analytics',
             element: <DashboardAnalytics />
-        }
+        },
+        {
+            path: '/users',
+            element: <Users />
+        },
+        {
+            path: '/calculator',
+            element: <Calculator />
+        },
+        
     ]
 };
 
-export default MainRoutes;
+export default AdminRoutes;

@@ -18,7 +18,7 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 import AuthSlider from 'ui-component/cards/AuthSlider';
 
 // assets
-import imgMain from 'assets/images/auth/img-a2-login.svg';
+import imgMain from 'assets/images/auth/[freepicdownloader.com]-digital-device-with-digital-display-showing-time-9-15-medium.jpg';
 import React from 'react';
 
 // carousel items
@@ -112,12 +112,12 @@ const Login2 = () => {
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <Box
                         className="relative rounded-lg"
-                        style={{
-                            backgroundImage:
-                                'url(https://images.unsplash.com/photo-1528122819723-9dca3a31295d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHN1c3RhaW5hYmlsaXR5fGVufDB8fDB8fHww)',
+                        sx={{
+                            backgroundImage: `url(${imgMain})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            height: '100%'
+                            height: '99%',
+                            borderRadius: '1.5rem'
                         }}
                     >
                         <div
@@ -126,7 +126,7 @@ const Login2 = () => {
                                 position: 'absolute',
                                 bottom: 0,
                                 width: '100%',
-                                height: '25%',
+                                height: '35%',
                                 background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4))',
                                 backdropFilter: 'blur(6px)',
                                 display: 'flex',
@@ -137,13 +137,18 @@ const Login2 = () => {
                                 fontWeight: 'bold'
                             }}
                         >
-                            <Typography>
-                                “Excite! has saved us thousands of hours of work. We are able to spin up projects faster and take on more
-                                clients.”
-                            </Typography>
-                            <Typography>Lula Meyers</Typography>
-                            <Typography>Product Manager, Hourglass</Typography>
-                            <Typography>Web Design Agency</Typography>
+                            <Box>
+                                <Typography variant="h3" sx={{ mb: 4, pl: 4, color: 'white', lineHeight: 1.5  }}>
+                                    “Through resilience, innovation and a commitment to Environmental, Social, and Governance (ESG)
+                                    principles, we continue to shape a brighter future for all.”
+                                </Typography>
+                                <Box>
+                                    <Typography variant="h2" sx={{ mb: 1, pl: 4, color: 'white' }}>
+                                        Tom Gitogo
+                                    </Typography>
+                                    <Typography sx={{ pl: 4 }}>Group MD & CEO Britam Group</Typography>
+                                </Box>
+                            </Box>
                         </div>
                     </Box>
                 </Grid>
