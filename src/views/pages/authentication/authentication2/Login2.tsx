@@ -18,7 +18,8 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 import AuthSlider from 'ui-component/cards/AuthSlider';
 
 // assets
-import imgMain from 'assets/images/auth/img-a2-login.svg';
+import imgMain from 'assets/images/auth/[freepicdownloader.com]-digital-device-with-digital-display-showing-time-9-15-medium.jpg';
+import React from 'react';
 
 // carousel items
 const items = [
@@ -38,7 +39,7 @@ const items = [
 
 // ================================|| AUTH2 - LOGIN ||================================ //
 
-const Login = () => {
+const Login2 = () => {
     const downMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const downLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
@@ -109,35 +110,51 @@ const Login = () => {
                     </Grid>
                 </Grid>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
-                    <BackgroundPattern2>
-                        <Grid item container justifyContent="center">
-                            <Grid item xs={12}>
-                                <Grid item container justifyContent="center" sx={{ pb: 8 }}>
-                                    <Grid item xs={10} lg={8} sx={{ '& .slick-list': { pb: 2 } }}>
-                                        <AuthSlider items={items} />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={12} sx={{ position: 'relative' }}>
-                                <img
-                                    alt="Auth method"
-                                    src={imgMain}
-                                    style={{
-                                        maxWidth: '100%',
-                                        margin: '0 auto',
-                                        display: 'block',
-                                        width: 300,
-                                        position: 'relative',
-                                        zIndex: 5
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </BackgroundPattern2>
+                    <Box
+                        className="relative rounded-lg"
+                        sx={{
+                            backgroundImage: `url(${imgMain})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            height: '99%',
+                            borderRadius: '1.5rem'
+                        }}
+                    >
+                        <div
+                            className="rounded-b-lg"
+                            style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                width: '100%',
+                                height: '35%',
+                                background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4))',
+                                backdropFilter: 'blur(6px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                                fontSize: '1.5rem',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            <Box>
+                                <Typography variant="h3" sx={{ mb: 4, pl: 4, color: 'white', lineHeight: 1.5  }}>
+                                    “Through resilience, innovation and a commitment to Environmental, Social, and Governance (ESG)
+                                    principles, we continue to shape a brighter future for all.”
+                                </Typography>
+                                <Box>
+                                    <Typography variant="h2" sx={{ mb: 1, pl: 4, color: 'white' }}>
+                                        Tom Gitogo
+                                    </Typography>
+                                    <Typography sx={{ pl: 4 }}>Group MD & CEO Britam Group</Typography>
+                                </Box>
+                            </Box>
+                        </div>
+                    </Box>
                 </Grid>
             </Grid>
         </AuthWrapper2>
     );
 };
 
-export default Login;
+export default Login2;

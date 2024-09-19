@@ -26,7 +26,7 @@ import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
 
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
-const EarningCard = ({ isLoading }) => {
+const EarningCard = ({ isLoading , netEmissions }) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -150,7 +150,7 @@ const EarningCard = ({ isLoading }) => {
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            $500.00
+                                            {netEmissions}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -175,7 +175,7 @@ const EarningCard = ({ isLoading }) => {
                                         color: theme.palette.mode === ThemeMode.DARK ? 'text.secondary' : 'secondary.200'
                                     }}
                                 >
-                                    Total Earning
+                                    Net Emissions
                                 </Typography>
                             </Grid>
                         </Grid>

@@ -28,6 +28,7 @@ import { useGetMenuMaster } from 'api/menu';
 // assets
 import { IconChevronDown, IconChevronRight, IconChevronUp } from '@tabler/icons-react';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import React from 'react';
 
 // horizontal-menu - wrapper
 const PopperStyled = styled(Popper)(({ theme }) => ({

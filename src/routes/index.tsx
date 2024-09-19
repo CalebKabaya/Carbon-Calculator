@@ -8,11 +8,13 @@ import AuthenticationRoutes from './AuthenticationRoutes';
 
 // project import
 import Loadable from 'ui-component/Loadable';
+import AdminRoutes from './AdminRoutes';
 
-const PagesLanding = Loadable(lazy(() => import('views/pages/landing')));
+const AuthLogin2 = Loadable(lazy(() => import('views/pages/authentication/authentication2/Login2')));
+
 
 // ==============================|| ROUTING RENDER ||============================== //
-const router = createBrowserRouter([{ path: '/', element: <PagesLanding /> }, AuthenticationRoutes, LoginRoutes, MainRoutes], {
+const router = createBrowserRouter([{ path: '/', element: <AuthLogin2  /> }, AuthenticationRoutes, LoginRoutes, MainRoutes, AdminRoutes], {
     basename: import.meta.env.VITE_APP_BASE_NAME
 });
 

@@ -11,6 +11,7 @@ import Chart from 'react-apexcharts';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import React from 'react';
 
 // ===========================|| REVENUE CHART CARD ||=========================== //
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -29,13 +29,19 @@ import useScriptRef from 'hooks/useScriptRef';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useAuthStore } from 'CarbonCarculator/store';
+import { LoginRequest } from 'CarbonCarculator/models';
+import { toast } from 'sonner';
+// import { shallow } from 'zustand';
+import axios from 'axios';
+import InfiniteLoopAnimation from 'CarbonCarculator/components/LoginLoader';
 
 // ===============================|| JWT LOGIN ||=============================== //
 
 const JWTLogin = ({ loginProp, ...others }) => {
     const theme = useTheme();
+    const navigate = useNavigate();
 
-    const { login } = useAuth();
     const scriptedRef = useScriptRef();
 
     const [checked, setChecked] = React.useState(true);
@@ -49,11 +55,55 @@ const JWTLogin = ({ loginProp, ...others }) => {
         event.preventDefault();
     };
 
+    // console.log('11111111111111111111111111111111111')
+
+    const { isLoading, error, userData, login } = useAuthStore();
+
+    // console.log('22222222222222222222222')
+
+    const handleLogin = async (email: string, password: string) => {
+        try {
+            const loginRequest: LoginRequest = {
+                emailAddress: email,
+                password: password
+            };
+
+            await login(loginRequest);
+            toast.success('Login successful');
+            //TODO: Make this dynamic
+            navigate('/dashboard/default');
+            // window.location.reload();  
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const statusCode = error.response?.status;
+
+                switch (statusCode) {
+                    case 404:
+                        //* Incorrect email
+                        toast.error('Account not found');
+                        break;
+                    case 500:
+                        //* Incorrect password
+                        toast.error('Incorrect email or password');
+                        break;
+                    default:
+                        console.log(`Error code: ${statusCode}`);
+                        toast.error(`Login failed`);
+                }
+            } else {
+                toast.error('Login failed - An unexpected error occurred');
+            }
+        }
+    };
+
+    // console.log('33333333333333333333333333333')
+
+
     return (
         <Formik
             initialValues={{
-                email: 'info@codedthemes.com',
-                password: '123456',
+                email: '',
+                password: '',
                 submit: null
             }}
             validationSchema={Yup.object().shape({
@@ -62,7 +112,7 @@ const JWTLogin = ({ loginProp, ...others }) => {
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                 try {
-                    await login(values.email, values.password);
+                    await handleLogin(values.email, values.password);
 
                     if (scriptedRef.current) {
                         setStatus({ success: true });
@@ -148,11 +198,7 @@ const JWTLogin = ({ loginProp, ...others }) => {
                             <Typography
                                 variant="subtitle1"
                                 component={Link}
-                                to={
-                                    loginProp
-                                        ? `/pages/forgot-password/forgot-password${loginProp}`
-                                        : '/pages/forgot-password/forgot-password3'
-                                }
+                                to={loginProp ? `/auth/forgot-password` : '/auth/forgot-password'}
                                 color="secondary"
                                 sx={{ textDecoration: 'none' }}
                             >
@@ -167,11 +213,24 @@ const JWTLogin = ({ loginProp, ...others }) => {
                         </Box>
                     )}
                     <Box sx={{ mt: 2 }}>
-                        <AnimateButton>
-                            <Button color="secondary" disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained">
-                                Sign In
-                            </Button>
-                        </AnimateButton>
+                        {isLoading ? (
+                            <InfiniteLoopAnimation />
+                        ) : (
+                            <AnimateButton>
+                                <Button
+                                    disableElevation
+                                    // disabled={isSubmitting}
+                                    disabled={isLoading} // Disable button while loading
+                                    fullWidth
+                                    size="large"
+                                    type="submit"
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    Sign in
+                                </Button>
+                            </AnimateButton>
+                        )}
                     </Box>
                 </form>
             )}
